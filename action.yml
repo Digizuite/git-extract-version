@@ -1,0 +1,12 @@
+name: 'Git Extract Version'
+description: 'Extracts the version number from a Git repository based on the branch name'
+inputs:
+  main_version:
+    description: 'The version number that should be used if a version cannot be extracted from the current ref name'
+    required: true
+outputs:
+  version:
+    description: 'The version number that should be used'
+runs:
+  using: 'node16'
+  main: 'index.mjs'
