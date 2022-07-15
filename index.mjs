@@ -4,7 +4,7 @@ const branchVersionRegex = /^.*?\/(?<version>\d+\.\d+\.\d+)(?:\/(?:.*)+)?$/;
 const versionTagRegex = /^v(?<version>\d+\.\d+\.\d+)$/;
 
 function getBranchInfoNumber(refName) {
-    return refName.replaceAll(/"<>\|\t\\/, '').replaceAll('/', "_");
+    return refName.replaceAll(/["<>|\t\\]/g, '').replaceAll('/', "_");
 }
 
 function extractVersionNumber() {
