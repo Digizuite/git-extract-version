@@ -11,9 +11,10 @@ function extractVersionNumber() {
     const refName = process.env.GITHUB_REF_NAME;
     const runNumber = process.env.GITHUB_RUN_NUMBER;
     const result = branchVersionRegex.exec(refName) ?? versionTagRegex.exec(refName);
+    const mainVersion = core.getInput('main_version');
     let version;
     if (result === null) {
-        version = core.getInput('main_version');
+        version = mainVersion;
 
         if(refName !== 'master') {
             core.info('Not on master branch, adding branch name to build name');
@@ -29,14 +30,15 @@ function extractVersionNumber() {
         }
         core.info(`Version was extracted from refname without issues: '${version}'`);
     }
-    return `${version}-${runNumber}`;
+    const fullVersionNumber = `${version}-${runNumber}`;
+    core.setOutput('version', fullVersionNumber);
+    core.setOutput('release_version', result ?? mainVersion);
 }
 
 try {
 
-    const version = extractVersionNumber();
+    extractVersionNumber();
 
-    core.setOutput('version', version);
 
 } catch(error) {
     core.setFailed(error.message);
