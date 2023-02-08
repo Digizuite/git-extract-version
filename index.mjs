@@ -32,7 +32,7 @@ function extractVersionNumber() {
     }
     const fullVersionNumber = `${version}-${runNumber}`;
     core.setOutput('version', fullVersionNumber);
-    core.setOutput('release_version', result ?? mainVersion);
+    core.setOutput('release_version', result?.groups?.version ?? mainVersion);
 }
 
 try {
