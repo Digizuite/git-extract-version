@@ -8,5 +8,5 @@ outputs:
   version:
     description: 'The version number that should be used'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.mjs'
